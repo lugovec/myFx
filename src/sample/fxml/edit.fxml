@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Controller">
+   <children>
+      <TextField layoutX="129.0" layoutY="152.0" />
+      <TextField layoutX="129.0" layoutY="218.0" />
+      <Label layoutX="68.0" layoutY="157.0" text="Имя" />
+      <Label layoutX="50.0" layoutY="223.0" text="Телефонl" />
+      <Button layoutX="374.0" layoutY="152.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Ok" />
+      <Button layoutX="374.0" layoutY="218.0" mnemonicParsing="false" text="Отмена" />
+      <Button layoutX="227.0" layoutY="85.0" mnemonicParsing="false" text="Button" />
+   </children>
+</Pane>
