@@ -14,7 +14,7 @@
    <children>
       <HBox maxHeight="200.0" prefHeight="70.0" prefWidth="150.0">
          <children>
-            <Button fx:id="btnAdd" mnemonicParsing="false"  text="Добавить">
+            <Button fx:id="btnAdd" onAction="#showDialog"  mnemonicParsing="false"  text="Добавить">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
