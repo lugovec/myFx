@@ -1,18 +1,20 @@
 package sample.controllers;
 
 import javafx.application.Application;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sample.Interfaces.impl.CollectionAdressBook;
+import sample.objects.Person;
+import sample.start.*;
 
 import java.io.IOException;
 
@@ -39,7 +41,40 @@ public class MainController {
     @FXML
     private Label labelCount;
 
+    @FXML
+    private TableColumn<Person, String> columnFio;
 
+    @FXML
+    private TableColumn<Person, String>columnPhone;
+
+    CollectionAdressBook adressBookImpl = new CollectionAdressBook();
+
+
+    @FXML
+    private void initialize() {
+
+        //Связываю поля в таблице с полями класса Person
+        columnFio.setCellValueFactory(new PropertyValueFactory<Person, String>("fio"));
+        columnPhone.setCellValueFactory(new PropertyValueFactory<Person, String>("phone"));
+
+        //Автоматическая проверка изменений в таблице
+        adressBookImpl.getPersonList().addListener(new ListChangeListener<Person>() {
+            @Override
+            public void onChanged(Change<? extends Person> c) {
+                updateCountLabel();
+            }
+        });
+
+        adressBookImpl.fillTestData();
+        tableAdressBook.setItems(adressBookImpl.getPersonList());
+
+
+    }
+
+    private void updateCountLabel() {
+
+        labelCount.setText("Количество записей: " + adressBookImpl.getPersonList().size());
+    }
 
     public void showDialog(javafx.event.ActionEvent actionEvent){
 
