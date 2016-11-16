@@ -50,7 +50,7 @@ public class MainController {
     CollectionAdressBook adressBookImpl = new CollectionAdressBook();
 
 
-    @FXML
+   @FXML
     private void initialize() {
 
         //Связываю поля в таблице с полями класса Person
@@ -76,7 +76,28 @@ public class MainController {
         labelCount.setText("Количество записей: " + adressBookImpl.getPersonList().size());
     }
 
-    public void showDialog(javafx.event.ActionEvent actionEvent){
+    @FXML
+    public void showDialog(ActionEvent actionEvent){
+
+        Object source = actionEvent.getSource();
+
+        if (!(source instanceof Button)) return;
+
+        Button clickedButton = (Button) source;
+
+        Person selectedPerson = (Person) tableAdressBook.getSelectionModel().getSelectedItem();
+
+        switch (clickedButton.getId()) {
+            case "btnAdd":
+                System.out.println("add " + selectedPerson);
+                break;
+            case "btnEdit":
+                System.out.println("edit " + selectedPerson);
+                break;
+            case "btnDelete":
+                System.out.println("delete " + selectedPerson);
+                break;
+        }
 
         try{
             Stage stage = new Stage();
@@ -90,9 +111,23 @@ public class MainController {
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace();}
+
         }
     }
 
+/*try{
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("../fxml/edit.fxml"));
+            stage.setTitle("Редактирование записи");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
+            stage.show();
 
-}
+
+
+        } catch (IOException e) {
+            e.printStackTrace();}*/
+
+
