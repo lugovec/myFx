@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.EditController">
+
+<Pane fx:controller="sample.controllers.EditController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField layoutX="129.0" layoutY="152.0" />
-      <TextField layoutX="129.0" layoutY="218.0" />
-      <Label layoutX="68.0" layoutY="157.0" text="Имя" />
-      <Label layoutX="50.0" layoutY="223.0" text="Телефонl" />
-      <Button  defaultButton="true" layoutX="374.0" layoutY="152.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Ok" />
-      <Button  cancelButton="true" layoutX="374.0" layoutY="218.0" mnemonicParsing="false" text="Отмена" />
-      <Button layoutX="227.0" layoutY="85.0" mnemonicParsing="false" text="Button" />
+      <TextField fx:id="txtFIO" layoutX="141.0" layoutY="113.0" />
+      <TextField fx:id="txtPhone" layoutX="141.0" layoutY="187.0" />
+      <Button fx:id="btnOk" onAction="#actionSave" layoutX="381.0" layoutY="113.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="ok" />
+      <Button fx:id="btnCancel" onAction="#actionClose" layoutX="381.0" layoutY="187.0" mnemonicParsing="false" text="cancel" />
    </children>
 </Pane>

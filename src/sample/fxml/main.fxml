@@ -14,7 +14,7 @@
    <children>
       <HBox maxHeight="200.0" prefHeight="70.0" prefWidth="150.0">
          <children>
-            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#showDialog" text="Добавить">
+            <Button fx:id="btnAdd" onAction="#actionButtonPressed" mnemonicParsing="false" text="Add">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -22,7 +22,7 @@
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnEdit" maxWidth="200.0" mnemonicParsing="false" onAction="#showDialog" text="Изменить">
+            <Button fx:id="btnEdit" maxWidth="200.0" mnemonicParsing="false" onAction="#actionButtonPressed" text="Изменить">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -30,7 +30,7 @@
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#showDialog" text="Удалить">
+            <Button fx:id="btnDelete" onAction="#actionButtonPressed" mnemonicParsing="false" text="Удалить">
                <HBox.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </HBox.margin>

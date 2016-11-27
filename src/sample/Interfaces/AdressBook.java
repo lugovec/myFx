@@ -12,6 +12,6 @@ public interface AdressBook {
 
     void update(Person person);
 
-    void deleete(Person person);
+    void delete(Person person);
 
 }

@@ -25,7 +25,7 @@ public class CollectionAdressBook implements AdressBook {
     }
 
     @Override
-    public void deleete(Person person) {
+    public void delete(Person person) {
         personList.remove(person);
     }
 

@@ -10,11 +10,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import sample.Interfaces.impl.CollectionAdressBook;
 import sample.objects.Person;
 import sample.start.*;
+import sample.Interfaces.impl.CollectionAdressBook;
 
 import java.io.IOException;
 
@@ -48,10 +51,22 @@ public class MainController {
     private TableColumn<Person, String>columnPhone;
 
     CollectionAdressBook adressBookImpl = new CollectionAdressBook();
+    private Stage mainStage;
+
+    private Parent fxmlEdit;
+    private FXMLLoader fxmlLoader = new FXMLLoader();
+    private EditController editController;
+    private Stage editStage;
+
+    public void setMainStage(Stage mainStage){
+        this.mainStage = mainStage;
+    }
 
 
    @FXML
-    private void initialize() {
+   private void initialize() {
+
+       //tableAdressBook.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         //Связываю поля в таблице с полями класса Person
         columnFio.setCellValueFactory(new PropertyValueFactory<Person, String>("fio"));
@@ -68,6 +83,16 @@ public class MainController {
         adressBookImpl.fillTestData();
         tableAdressBook.setItems(adressBookImpl.getPersonList());
 
+       try {
+
+           fxmlLoader.setLocation(getClass().getResource("../fxml/edit.fxml"));
+           fxmlEdit = fxmlLoader.load();
+           editController = fxmlLoader.getController();
+
+
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
 
     }
 
@@ -76,8 +101,10 @@ public class MainController {
         labelCount.setText("Количество записей: " + adressBookImpl.getPersonList().size());
     }
 
+
+
     @FXML
-    public void showDialog(ActionEvent actionEvent){
+    public void actionButtonPressed(ActionEvent actionEvent){
 
         Object source = actionEvent.getSource();
 
@@ -87,47 +114,45 @@ public class MainController {
 
         Person selectedPerson = (Person) tableAdressBook.getSelectionModel().getSelectedItem();
 
+        Window parentWindow = ((Node)actionEvent.getSource()).getScene().getWindow();
+
+        editController.setPerson(selectedPerson);
+
+
         switch (clickedButton.getId()) {
             case "btnAdd":
-                System.out.println("add " + selectedPerson);
+                editController.setPerson(new Person());
+                showDialog();
+                adressBookImpl.add(editController.getPerson());
+
+
                 break;
+
             case "btnEdit":
-                System.out.println("edit " + selectedPerson);
+                showDialog();
                 break;
+
             case "btnDelete":
-                System.out.println("delete " + selectedPerson);
+                adressBookImpl.delete((Person) tableAdressBook.getSelectionModel().getSelectedItem());
                 break;
         }
 
-        try{
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("../fxml/edit.fxml"));
-            stage.setTitle("Редактирование записи");
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
-            stage.show();
 
-
-
-        } catch (IOException e) {
-            e.printStackTrace();}
-
-        }
     }
 
-/*try{
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("../fxml/edit.fxml"));
-            stage.setTitle("Редактирование записи");
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
-            stage.show();
+            private void showDialog() {
+                if (editStage == null) {
+                    editStage = new Stage();
+                    editStage.setTitle("Редактирование записи");
+                    editStage.setScene(new Scene(fxmlEdit));
+                    editStage.initModality(Modality.WINDOW_MODAL);
+                    editStage.initOwner(mainStage);
+                    editStage.show();
+                }
+                //editStage.showAndWait();
+                editStage.show();
+            }
 
-
-
-        } catch (IOException e) {
-            e.printStackTrace();}*/
+    }
 
 

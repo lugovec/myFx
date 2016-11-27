@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.Interfaces.impl.CollectionAdressBook;
+import sample.controllers.MainController;
 import sample.objects.Person;
 
 import static javafx.application.Application.launch;
@@ -17,9 +18,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../fxml/main.fxml"));
+        Parent fxmlMain = fxmlLoader.load();
+        MainController mainController = fxmlLoader.getController();
+        mainController.setMainStage(primaryStage);
+
+
         primaryStage.setTitle("Адресная книга");
-        primaryStage.setScene(new Scene(root, 500, 500));
+        primaryStage.setScene(new Scene(fxmlMain, 500, 500));
         primaryStage.show();
 
         testData();
